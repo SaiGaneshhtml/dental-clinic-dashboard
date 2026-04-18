@@ -1,72 +1,105 @@
-# ENTNT Dental Center Management Dashboard
+# dental-clinic-dashboard
 
-This is a frontend-only application for a Dental Center Management Dashboard, built as a technical assignment for ENTNT.
+A frontend-only Dental Clinic Management Dashboard built with React, TypeScript, and Vite. Designed as a role-based single-page application where admins (dentists) manage patients and appointments, while patients can view their own records.
 
-## Project Description
+---
 
-The application provides a dashboard for managing patients and their dental appointments (incidents). It supports two user roles:
-- **Admin (Dentist):** Full access to manage patients and appointments.
-- **Patient:** Limited view to see their own data and appointment history.
+## Features
 
-All data is simulated and persisted using the browser's `localStorage`. No backend services or external APIs are used.
+### Admin (Dentist)
+- View, add, edit, and delete patient records
+- Manage appointments and incidents per patient
+- Record post-appointment details: treatment cost, status, and file attachments
+- Monthly/weekly calendar view of all scheduled appointments
+- Dashboard with KPIs — upcoming appointments, total revenue, and treatment status breakdown
 
-## Core Features
+### Patient
+- View personal profile
+- See upcoming appointments
+- Access full appointment history including costs and uploaded files
 
-- **User Authentication:** Simulated login for Admin and Patient roles with session persistence.
-- **Role-Based Access Control:** Frontend routes and components are protected based on user role.
-- **Patient Management (Admin):** Admins can view, add, edit, and delete patient records.
-- **Appointment/Incident Management (Admin):** Admins can manage patient incidents, including adding post-appointment details like cost, status, and file uploads.
-- **Calendar View (Admin):** A monthly/weekly calendar view of all appointments.
-- **Dashboard (Admin):** A landing page displaying KPIs like upcoming appointments, revenue, and treatment statuses.
-- **Patient View:** Patients can view their own profile, upcoming appointments, and full history with costs and file attachments.
+---
 
-## Tech Stack & Architecture
+## Tech Stack
 
-- **React:** The core UI library, using functional components and hooks.
-- **Vite:** The build tool for a fast development experience.
-- **TypeScript:** For static typing and improved code quality.
-- **React Router:** For all client-side routing and navigation.
-- **React Context API:** For state management (`AuthContext` for user session, `DataContext` for application data). This choice keeps the app lightweight without needing a larger library like Redux for a project of this scale.
-- **TailwindCSS:** For all styling. It allows for rapid development of a consistent, modern UI.
-- **localStorage:** Used to simulate a database. All data is fetched from and persisted to `localStorage`, making the application self-contained.
-- **Responsive Design:** The UI is built to be responsive across different device sizes.
+| Layer | Technology |
+|---|---|
+| UI Library | React (functional components + hooks) |
+| Language | TypeScript |
+| Build Tool | Vite |
+| Routing | React Router |
+| State Management | React Context API (`AuthContext`, `DataContext`) |
+| Styling | TailwindCSS |
+| Persistence | `localStorage` (simulated backend) |
 
-## Setup and Installation
+---
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <https://github.com/sandeep26-11/ENTNT_Dental_Center-Assignment.git>
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
-    cd ENTNT-Assignment
-    ```
-3.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-4.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
-    The application will be available at `http://localhost:5173` (or the next available port).
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+
+# Navigate into the project
+cd dental-clinic-dashboard
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+---
 
 ## Login Credentials
 
-You can use the following hardcoded credentials to test the application:
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@entnt.in` | `admin123` |
+| Patient | `sai@entnt.in` | `patient123` |
 
-- **Admin:**
-  - **Email:** `admin@entnt.in`
-  - **Password:** `admin123`
-- **Patient:**
-  - **Email:** `john@entnt.in`
-  - **Password:** `patient123`
+---
 
-## Issues and Technical Decisions
+## Project Structure
 
-- **State Management:** Context API was chosen over Redux because the state is relatively simple and doesn't require the extensive boilerplate of Redux. `AuthContext` handles the user's session, while `DataContext` manages all CRUD operations for patients and incidents, providing a centralized and predictable state management system.
-- **Data Persistence:** `localStorage` was used as required to simulate a backend. The `DataContext` acts as a service layer, abstracting the `localStorage` interactions away from the UI components.
-- **Styling:** TailwindCSS was used for its utility-first approach, which speeds up development and helps maintain a consistent design system without writing custom CSS files.
-- **File Uploads:** File uploads are simulated by creating Blob URLs (`URL.createObjectURL`). This provides a realistic preview and download experience without a backend to store the files.
+```
+src/
+├── components/       # Reusable UI components
+├── context/
+│   ├── AuthContext   # Handles login session and role
+│   └── DataContext   # CRUD operations and localStorage access
+├── pages/            # Route-level page components
+├── data/             # Seed/mock data and user definitions
+└── main.tsx
+```
 
-This concludes the development of the ENTNT Dental Center Management Dashboard.
+---
+
+## Architecture Notes
+
+**State Management — Context API over Redux**
+The app's state is straightforward: a user session and a set of CRUD operations over patients and incidents. Context API handles this cleanly without the overhead of Redux.
+
+**Data Persistence — localStorage**
+`DataContext` abstracts all `localStorage` reads and writes, acting as a lightweight service layer. UI components never interact with storage directly.
+
+**File Uploads**
+Files are handled via `URL.createObjectURL`, producing Blob URLs that allow realistic in-browser preview and download without any backend storage.
+
+**Role-Based Access**
+Routes and UI elements are conditionally rendered based on the authenticated user's role from `AuthContext`. Patients can only see their own data.
+
+---
+
+## License
+
+This project was built as a technical assignment and is intended for demonstration purposes.
