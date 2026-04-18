@@ -3,6 +3,7 @@
 A frontend-only Dental Clinic Management Dashboard built with React, TypeScript, and Vite. Designed as a role-based single-page application where admins (dentists) manage patients and appointments, while patients can view their own records.
 
 ---
+<img width="1903" height="915" alt="image" src="https://github.com/user-attachments/assets/7e07ef0b-5670-4dd0-ae71-479dd364d7fa" />
 
 ## Features
 
